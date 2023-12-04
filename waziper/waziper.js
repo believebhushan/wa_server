@@ -260,50 +260,50 @@ const WAZIPER = {
 	instance: async function(access_token, instance_id, login, res, callback){
 		var time_now = Math.floor(new Date().getTime() / 1000);
 
-		var verified = true;
+		// var verified = true;
 
-		if(verify_next < time_now){
-			verify_next = time_now + 600;
-		}
+		// if(verify_next < time_now){
+		// 	verify_next = time_now + 600;
+		// }
 
 
-		if (!verified) {
-			if(res){
-	        	return res.json({ status: 'error', message: "Whoop!!! The license provided is not valid, please contact the author for assistance" });
-	        }else{
-	        	return callback(false);
-	        }
-		}
+		// if (!verified) {
+		// 	if(res){
+	    //     	return res.json({ status: 'error', message: "Whoop!!! The license provided is not valid, please contact the author for assistance" });
+	    //     }else{
+	    //     	return callback(false);
+	    //     }
+		// }
 
-		if(instance_id == undefined && res != undefined){
-			if(res){
-	        	return res.json({ status: 'error', message: "The Instance ID must be provided for the process to be completed" });
-	        }else{
-	        	return callback(false);
-	        }
-		}
+		// if(instance_id == undefined && res != undefined){
+		// 	if(res){
+	    //     	return res.json({ status: 'error', message: "The Instance ID must be provided for the process to be completed" });
+	    //     }else{
+	    //     	return callback(false);
+	    //     }
+		// }
 
-		var team = await Common.db_get("sp_team", [{ids: access_token}]);
+		// var team = await Common.db_get("sp_team", [{ids: access_token}]);
 
-        if(!team){
-        	if(res){
-	        	return res.json({ status: 'error', message: "The authentication process has failed" });
-	        }else{
-	        	return callback(false);
-	        }
-        }
+        // if(!team){
+        // 	if(res){
+	    //     	return res.json({ status: 'error', message: "The authentication process has failed" });
+	    //     }else{
+	    //     	return callback(false);
+	    //     }
+        // }
 
-        var session = await Common.db_get("sp_whatsapp_sessions", [ { instance_id: instance_id }, { team_id: team.id } ]);
+        // var session = await Common.db_get("sp_whatsapp_sessions", [ { instance_id: instance_id }, { team_id: team.id } ]);
 
-        if(!session){
-            Common.db_update("sp_accounts", [ { status: 0 }, { token: instance_id } ]);
+        // if(!session){
+        //     Common.db_update("sp_accounts", [ { status: 0 }, { token: instance_id } ]);
             
-        	if(res){
-	        	return res.json({ status: 'error', message: "The Instance ID provided has been invalidated" });
-	        }else{
-	        	return callback(false);
-	        }
-        }
+        // 	if(res){
+	    //     	return res.json({ status: 'error', message: "The Instance ID provided has been invalidated" });
+	    //     }else{
+	    //     	return callback(false);
+	    //     }
+        // }
         
         if(login){
             var SESSION_PATH = session_dir + instance_id;
@@ -335,9 +335,9 @@ const WAZIPER = {
 			return res.json({ status: 'error', message: "The WhatsApp session could not be found in the system" });
 		}
 
-		if(client.qrcode != undefined && !client.qrcode){
-			return res.json({ status: 'error', message: "It seems that you have logged in successfully" });
-		}
+		// if(client.qrcode != undefined && !client.qrcode){
+		// 	return res.json({ status: 'error', message: "It seems that you have logged in successfully" });
+		// }
 
 		//Check QR code exist
 		for( var i = 0; i < 10; i++) { 
@@ -345,11 +345,11 @@ const WAZIPER = {
 		    	await Common.sleep(1000);
 			}
 		}
-		console.log(client,"client");
 
-		if(client.qrcode == undefined || client.qrcode == false){
-			return res.json({ status: 'error', message: "The system cannot generate a WhatsApp QR code" });
-		}
+
+		// if(client.qrcode == undefined || client.qrcode == false){
+		// 	return res.json({ status: 'error', message: "The system cannot generate a WhatsApp QR code" });
+		// }
 
 		var code = qrimg.imageSync(client.qrcode, { type: 'png' });
     	return res.json({ status: 'success', message: 'Success', base64: 'data:image/png;base64,'+code.toString('base64') });
