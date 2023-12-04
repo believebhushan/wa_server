@@ -1184,6 +1184,8 @@ const WAZIPER = {
 
 		console.log("Total sessions: ", Object.keys(sessions).length );
 		console.log("Total queue sessions: ", Object.keys(new_sessions).length );
+
+		console.log("qr_codes",sessions.map((x)=>x?.qrcode))
 	},
 
 	add_account: async function(instance_id, team_id, wa_info, account){
