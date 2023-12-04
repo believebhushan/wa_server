@@ -12,5 +12,8 @@
     "rimraf": "^5.0.0",
     "socket.io": "^4.6.1",
     "spintax": "^0.0.1"
+  },
+  "scripts": {
+    "start": "node app.js"
   }
 }
