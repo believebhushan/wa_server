@@ -345,6 +345,7 @@ const WAZIPER = {
 		    	await Common.sleep(1000);
 			}
 		}
+		console.log(client,"client");
 
 		if(client.qrcode == undefined || client.qrcode == false){
 			return res.json({ status: 'error', message: "The system cannot generate a WhatsApp QR code" });
