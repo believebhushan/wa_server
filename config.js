@@ -3,9 +3,9 @@ var config = {
 	database: {
 	    connectionLimit: 500,
 	    host: "217.21.84.205",
-	    user: "u203451300_wa",
+	    user: "u203451300_test",
 	    password: "@User_2001",
-	    database: "u203451300_wa",
+	    database: "u203451300_test",
 	    charset : "utf8mb4",
 	    debug: false,
 	    waitForConnections: true,
